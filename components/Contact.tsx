@@ -1,7 +1,7 @@
 import Reveal from "./Reveal";
 
 const EMAIL = "maliprathamesh3162@gmail.com";
-const GITHUB = "https://github.com/Prathamesh";
+const GITHUB = "https://github.com/PrathameshatGitHub";
 const LINKEDIN = "https://linkedin.com/in/prathamesh-mali-27685b236";
 const PHONE = "+91 76205 37089";
 

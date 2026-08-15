@@ -31,10 +31,9 @@ export default function Hero() {
 
         <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-inkmuted sm:text-base">
           Two years building production interfaces — from multi-vendor
-          booking platforms to an AI-powered QA tool used inside my own
-          team. I care about the difference between an app that renders
-          and one that holds up under real, messy use. I fix that gap,
-          then ship.
+          booking platforms and personal productivity suites (DailyDeck) to
+          AI-powered QA tools (BugDeck). I care about the difference between an app
+          that renders and one that holds up under real, messy use. I fix that gap, then ship.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center gap-4">

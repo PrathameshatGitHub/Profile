@@ -5,30 +5,33 @@ type Entry = {
   title: string;
   meta: string;
   changes: { type: "+" | "~"; text: string }[];
+  stack?: string[];
 };
 
 const entries: Entry[] = [
   {
     version: "v2.0.0",
     title: "React Developer",
-    meta: "Artcode Private Limited · Pune · Mar 2025 – Present",
+    meta: "Artcode Private Limited · Full-time · Pune, Maharashtra · Mar 2025 – Present",
     changes: [
-      { type: "+", text: "Built and maintained Next.js apps focused on SSR and performance." },
-      { type: "+", text: "Used Claude Code and GitHub Copilot in daily development to speed up features and improve code quality." },
-      { type: "+", text: "Ran SEO strategies that improved search rankings and organic traffic." },
-      { type: "~", text: "Improved Core Web Vitals through lazy loading, image optimization, and code splitting." },
-      { type: "~", text: "Built mobile-first, cross-browser layouts with Tailwind CSS." },
+      { type: "+", text: "Developed and maintained high-performance Next.js applications with a deep focus on server-side rendering (SSR) and performance optimization." },
+      { type: "+", text: "Leveraged AI-assisted development tools (Claude Code, GitHub Copilot) to accelerate feature shipping, refactoring, and code quality." },
+      { type: "+", text: "Executed advanced SEO strategies, leading to improved search rankings, discoverability, and increased organic traffic." },
+      { type: "+", text: "Designed responsive, mobile-first layouts with Tailwind CSS, guaranteeing cross-browser compatibility and accessibility." },
+      { type: "~", text: "Collaborated with backend teams to integrate RESTful APIs and enhanced Core Web Vitals via lazy loading, image optimization, and smart code splitting." },
     ],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "GitHub Copilot", "Claude Code", "REST APIs", "SSR"],
   },
   {
     version: "v1.0.0",
     title: "Frontend Developer",
-    meta: "Walstar Technology · Kolhapur · Jul 2024 – Feb 2025",
+    meta: "Walstar Technology · Full-time · Kolhapur · Jul 2024 – Feb 2025",
     changes: [
-      { type: "+", text: "Shipped 10+ WordPress websites with custom Elementor builds and responsive design." },
-      { type: "+", text: "Extended WordPress with custom JavaScript and CSS for interactions beyond default capabilities." },
-      { type: "~", text: "Improved load times through caching, image compression, and minification." },
+      { type: "+", text: "Developed over 10 WordPress websites using Elementor, incorporating custom interactive functionality and responsive design systems." },
+      { type: "+", text: "Implemented bespoke JavaScript and CSS to enhance interactive features and user experiences beyond standard WordPress capabilities." },
+      { type: "~", text: "Optimized website performance through caching strategies, image compression pipelines, and asset minification, delivering faster load times." },
     ],
+    stack: ["WordPress", "Elementor", "React", "JavaScript", "Tailwind CSS", "CSS3"],
   },
 ];
 
@@ -69,6 +72,19 @@ export default function Log() {
                     </li>
                   ))}
                 </ul>
+
+                {e.stack && (
+                  <div className="mt-6 flex flex-wrap gap-2 pt-2">
+                    {e.stack.map((s) => (
+                      <span
+                        key={s}
+                        className="rounded border border-line px-2 py-1 font-mono text-[11px] text-inkmuted"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </Reveal>
           ))}
