@@ -26,16 +26,29 @@ export default function Hero() {
         </h1>
 
         <p className="mt-4 max-w-xl font-mono text-sm text-inkmuted sm:text-base">
-          frontend developer — react.js · next.js · typescript
+          frontend developer (2+ yrs exp) — react.js · next.js · typescript
         </p>
 
-        <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-inkmuted sm:text-base">
-          Two years shipping Next.js apps at Artcode — mostly the stuff nobody
-          writes tickets for: stale loading states, forms that reset on error,
-          pages that hit 90 on Lighthouse but still feel slow. Also built a
-          full internal QA tool (BugDeck) and a productivity suite (DailyDeck)
-          from scratch on my own.
-        </p>
+        <div className="mt-6 max-w-2xl space-y-3 text-[15px] leading-relaxed text-inkmuted sm:text-base">
+          <p>
+            <strong className="font-medium text-ink">
+              Frontend Developer with over 2 years of experience
+            </strong>{" "}
+            designing and building responsive, user-focused web applications
+            using React, Next.js, TypeScript, and modern CSS frameworks.
+            Specialized in AI-assisted workflows (Claude Code, GitHub Copilot,
+            Cursor, AntiGravity) to ship polished, cross-browser, and
+            performance-optimized production UIs.
+          </p>
+          <p>
+            Currently at <strong className="font-medium text-ink">Artcode Pvt. Ltd.</strong> engineering
+            Next.js applications focused on Server-Side Rendering (SSR), Core
+            Web Vitals, technical SEO, and RESTful API integrations. Previously
+            delivered 10+ web builds at Walstar Technology and built full-stack
+            systems like DailyDeck and BugDeck. Graduated B.Tech in Computer
+            Science from D. Y. Patil College of Engineering (2024).
+          </p>
+        </div>
 
         <div className="mt-9 flex flex-wrap items-center gap-4">
           <a

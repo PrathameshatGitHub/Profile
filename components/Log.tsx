@@ -8,6 +8,21 @@ type Entry = {
   stack?: string[];
 };
 
+type Education = {
+  degree: string;
+  institution: string;
+  detail: string;
+  score: string;
+};
+
+type Certificate = {
+  title: string;
+  issuer: string;
+  date: string;
+  credentialId?: string;
+  verifyUrl?: string;
+};
+
 const entries: Entry[] = [
   {
     version: "v2.0.0",
@@ -35,13 +50,69 @@ const entries: Entry[] = [
   },
 ];
 
+const educationHistory: Education[] = [
+  {
+    degree: "B.Tech in Computer Science",
+    institution: "D Y Patil Pratishthan's College of Engineering",
+    detail: "2020 – 2024",
+    score: "CGPA 8.0 / 10.0",
+  },
+  {
+    degree: "Higher Secondary Certificate (Class XII, CBSE)",
+    institution: "Jawahar Navodaya Vidyalaya, Sangli",
+    detail: "Science Stream",
+    score: "80%",
+  },
+  {
+    degree: "Secondary School Certificate (Class X, CBSE)",
+    institution: "Jawahar Navodaya Vidyalaya, Sangli",
+    detail: "General Studies",
+    score: "88%",
+  },
+];
+
+const certificates: Certificate[] = [
+  {
+    title: "React Developer",
+    issuer: "Namaste React (NamasteDev)",
+    date: "2024",
+    credentialId: "In-depth React, Hooks, Redux, Performance & Architecture",
+  },
+  {
+    title: "AI for India 2.0",
+    issuer: "GUVI",
+    date: "Jul 2023",
+    credentialId: "610283E201a2sBVo89",
+    verifyUrl: "https://www.guvi.in/verify-certificate?id=610283E201a2sBVo89&course=ai_for_in_en",
+  },
+  {
+    title: "Programming Using Python",
+    issuer: "HCL GUVI",
+    date: "Aug 2023",
+    credentialId: "5552i991U9216441MT",
+    verifyUrl: "https://www.guvi.in/verify-certificate?id=5552i991U9216441MT&course=pythonEng",
+  },
+  {
+    title: "Back-End Engineering Virtual Experience",
+    issuer: "Forage",
+    date: "Jul 2023",
+    verifyUrl: "https://drive.google.com/file/d/1MrCQNKkshDek5SG3-DO1W9zEzaczvADB/view?usp=drivesdk",
+  },
+  {
+    title: "Soft Skill Development",
+    issuer: "TCS iON (Tata Consultancy Services)",
+    date: "Aug 2023",
+    credentialId: "172427-24843370-1016",
+  },
+];
+
 export default function Log() {
   return (
     <section id="log" className="border-t border-line">
       <div className="mx-auto max-w-content px-6 py-20">
         <Reveal>
           <span className="font-mono text-[12px] uppercase tracking-widest text-inkmuted">
-            log
+            log & experience
           </span>
         </Reveal>
 
@@ -90,12 +161,93 @@ export default function Log() {
           ))}
         </div>
 
-        <Reveal delay={140}>
-          <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-inkmuted">
-            B.Tech in Computer Science, D Y Patil Pratishthan&apos;s College
-            of Engineering — CGPA 8.0/10.0, 2020–2024. Based in Pune.
-          </p>
-        </Reveal>
+        {/* Education Subsection */}
+        <div className="mt-14">
+          <Reveal>
+            <span className="font-mono text-[12px] uppercase tracking-widest text-inkmuted">
+              education
+            </span>
+          </Reveal>
+
+          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {educationHistory.map((edu, idx) => (
+              <Reveal key={edu.degree} delay={idx * 60}>
+                <div className="flex h-full flex-col justify-between rounded-lg border border-line bg-surface p-5 transition-colors hover:border-teal/30">
+                  <div>
+                    <span className="inline-block rounded bg-tealsoft px-2 py-0.5 font-mono text-[11px] font-medium text-teal">
+                      {edu.score}
+                    </span>
+                    <h3 className="mt-2.5 font-display text-[15px] font-medium text-ink">
+                      {edu.degree}
+                    </h3>
+                    <p className="mt-1 text-[13px] text-inkmuted">
+                      {edu.institution}
+                    </p>
+                  </div>
+                  <p className="mt-3 font-mono text-[11px] text-inkmuted/70">
+                    {edu.detail}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        {/* Licenses & Certifications Subsection */}
+        <div className="mt-14">
+          <Reveal>
+            <div className="flex items-baseline justify-between">
+              <span className="font-mono text-[12px] uppercase tracking-widest text-inkmuted">
+                licenses & certifications
+              </span>
+              <span className="font-mono text-[11px] text-inkmuted">
+                5 credentials
+              </span>
+            </div>
+          </Reveal>
+
+          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+            {certificates.map((cert, idx) => (
+              <Reveal key={cert.title} delay={idx * 50}>
+                <div className="flex h-full flex-col justify-between rounded-lg border border-line bg-surface p-4 transition-all hover:border-teal/40">
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-mono text-[11px] text-teal font-medium">
+                        {cert.issuer}
+                      </span>
+                      <span className="font-mono text-[11px] text-inkmuted">
+                        {cert.date}
+                      </span>
+                    </div>
+
+                    <h4 className="mt-2 font-display text-sm font-medium text-ink">
+                      {cert.title}
+                    </h4>
+
+                    {cert.credentialId && (
+                      <p className="mt-1.5 font-mono text-[11px] text-inkmuted/80 break-all line-clamp-2">
+                        {cert.credentialId.startsWith("ID:") ? cert.credentialId : `ID: ${cert.credentialId}`}
+                      </p>
+                    )}
+                  </div>
+
+                  {cert.verifyUrl && (
+                    <div className="mt-3 pt-2 border-t border-line/60">
+                      <a
+                        href={cert.verifyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 font-mono text-[11px] text-teal hover:underline"
+                      >
+                        verify credential ↗
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

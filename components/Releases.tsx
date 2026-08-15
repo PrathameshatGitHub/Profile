@@ -3,14 +3,19 @@
 import { useState } from "react";
 import Reveal from "./Reveal";
 
+type ProjectImage = {
+  src: string;
+  label: string;
+  caption?: string;
+};
+
 type Release = {
   version: string;
   name: string;
   tagline: string;
   status: "shipped";
   summary: string;
-  image?: string;
-  imagePlaceholderText: string;
+  images: ProjectImage[];
   liveUrl?: string;
   codeUrl?: string;
   notes: { type: "+" | "~"; text: string }[];
@@ -23,8 +28,28 @@ const releases: Release[] = [
     name: "DailyDeck",
     tagline: "Personal Productivity & Habit Suite",
     status: "shipped",
-    image: "/projects/dailydeck.png",
-    imagePlaceholderText: "Add screenshot: /public/projects/dailydeck.png",
+    images: [
+      {
+        src: "/images/dailydeck-tasks.png",
+        label: "Kanban Tasks",
+        caption: "Daily task board with drag-and-drop, priority tags, and auto-reset recurring tasks",
+      },
+      {
+        src: "/images/dailydeck-notes.png",
+        label: "Notes & Keep",
+        caption: "Minimalist note-taking space with instant search and markdown support",
+      },
+      {
+        src: "/images/dailydeck-schedule.png",
+        label: "Schedule",
+        caption: "Calendar scheduling view for planning routines and timeblocks",
+      },
+      {
+        src: "/images/dailydeck-logs.png",
+        label: "Activity Logs",
+        caption: "Historical streak tracking, date logging, and productivity analytics",
+      },
+    ],
     liveUrl: "https://daily-deck-iota.vercel.app/",
     codeUrl: "https://github.com/PrathameshatGitHub",
     summary:
@@ -43,8 +68,29 @@ const releases: Release[] = [
     name: "BugDeck",
     tagline: "AI-Powered QA & Bug Tracking Platform",
     status: "shipped",
-    image: "/projects/bugdeck.png",
-    imagePlaceholderText: "Add screenshot: /public/projects/bugdeck.png",
+    images: [
+      {
+        src: "/images/bugdeck-1.png",
+        label: "Bug Board",
+        caption: "5-status Kanban bug management board with drag-and-drop state updates",
+      },
+      {
+        src: "/images/bugdeck-2.png",
+        label: "Test Cases (TestIt)",
+        caption: "Comprehensive test suite management with step-by-step test execution",
+      },
+      {
+        src: "/images/bugdeck-3.png",
+        label: "Analytics",
+        caption: "Dual-source analytics charts showing issue resolution velocity and breakdowns",
+      },
+      {
+        src: "/images/bugdeck-4.png",
+        label: "Workspaces & AI",
+        caption: "Role-based project workspace settings and AI bug generator configuration",
+      },
+    ],
+    liveUrl: "https://bug-deck.vercel.app/",
     codeUrl: "https://github.com/PrathameshatGitHub",
     summary:
       "Full-stack internal QA and bug-tracking platform with 5-status Kanban board, TestIt test-case management module, screenshot-based bug detection, and deep analytics.",
@@ -68,46 +114,84 @@ function StatusPill() {
   );
 }
 
-function ProjectImageSlot({
-  src,
-  alt,
-  placeholderText,
+function ProjectGallery({
+  images,
+  projectName,
 }: {
-  src?: string;
-  alt: string;
-  placeholderText: string;
+  images: ProjectImage[];
+  projectName: string;
 }) {
-  const [imgFailed, setImgFailed] = useState(false);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [failedImages, setFailedImages] = useState<Record<number, boolean>>({});
+
+  const currentImage = images[activeIdx] || images[0];
 
   return (
-    <div className="relative mt-5 overflow-hidden rounded-md border border-line bg-paper/60">
-      <div className="aspect-[16/9] w-full flex flex-col items-center justify-center p-6 text-center">
-        {src && !imgFailed ? (
-          <img
-            src={src}
-            alt={alt}
-            className="h-full w-full object-cover rounded"
-            onError={() => setImgFailed(true)}
-          />
-        ) : (
-          <div className="flex flex-col items-center justify-center gap-2 text-inkmuted">
-            <svg
-              className="h-8 w-8 text-line stroke-current"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
+    <div className="mt-5 space-y-3">
+      {/* Tab Switcher */}
+      <div className="flex flex-wrap items-center gap-1.5 border-b border-line pb-2">
+        <span className="mr-1 font-mono text-[11px] uppercase tracking-wider text-inkmuted">
+          Views:
+        </span>
+        {images.map((img, idx) => {
+          const isActive = idx === activeIdx;
+          return (
+            <button
+              key={img.label}
+              type="button"
+              onClick={() => setActiveIdx(idx)}
+              className={`rounded px-2.5 py-1 font-mono text-[12px] font-medium transition-all ${
+                isActive
+                  ? "bg-ink text-paper shadow-sm"
+                  : "bg-paper text-inkmuted hover:border-line hover:bg-surface hover:text-ink"
+              }`}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-              />
-            </svg>
-            <p className="font-mono text-[12px] font-medium text-ink">
-              {alt} Preview
-            </p>
-            <span className="font-mono text-[11px] text-inkmuted/70">
-              {placeholderText}
+              {img.label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Screenshot Frame */}
+      <div className="relative overflow-hidden rounded-md border border-line bg-paper/80 transition-all group-hover:border-ink/20">
+        <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0e121e]/5">
+          {!failedImages[activeIdx] ? (
+            <img
+              key={currentImage.src}
+              src={currentImage.src}
+              alt={`${projectName} - ${currentImage.label}`}
+              className="h-full w-full object-cover object-top transition-opacity duration-200"
+              onError={() =>
+                setFailedImages((prev) => ({ ...prev, [activeIdx]: true }))
+              }
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-2 p-6 text-center text-inkmuted">
+              <svg
+                className="h-8 w-8 text-line stroke-current"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                />
+              </svg>
+              <p className="font-mono text-[12px] font-medium text-ink">
+                {currentImage.label} preview
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Caption bar */}
+        {currentImage.caption && (
+          <div className="flex items-center justify-between border-t border-line bg-surface px-3 py-1.5 font-mono text-[11px] text-inkmuted">
+            <span>{currentImage.caption}</span>
+            <span className="hidden sm:inline">
+              {activeIdx + 1} / {images.length}
             </span>
           </div>
         )}
@@ -177,12 +261,8 @@ export default function Releases() {
                   {r.summary}
                 </p>
 
-                {/* Visual Screenshot Slot with graceful placeholder */}
-                <ProjectImageSlot
-                  src={r.image}
-                  alt={r.name}
-                  placeholderText={r.imagePlaceholderText}
-                />
+                {/* Interactive Screenshot Gallery */}
+                <ProjectGallery images={r.images} projectName={r.name} />
 
                 <ul className="mt-6 space-y-2">
                   {r.notes.map((n, j) => (
