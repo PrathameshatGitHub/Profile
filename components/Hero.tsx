@@ -30,18 +30,21 @@ export default function Hero() {
         </p>
 
         <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-inkmuted sm:text-base">
-          Two years building production interfaces — from multi-vendor
-          booking platforms and personal productivity suites (DailyDeck) to
-          AI-powered QA tools (BugDeck). I care about the difference between an app
-          that renders and one that holds up under real, messy use. I fix that gap, then ship.
+          Two years shipping Next.js apps at Artcode — mostly the stuff nobody
+          writes tickets for: stale loading states, forms that reset on error,
+          pages that hit 90 on Lighthouse but still feel slow. Also built a
+          full internal QA tool (BugDeck) and a productivity suite (DailyDeck)
+          from scratch on my own.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center gap-4">
           <a
-            href="#releases"
+            href="/resume.pdf"
+            target="_blank"
+            rel="noreferrer"
             className="rounded-md bg-ink px-5 py-2.5 font-mono text-[13px] font-medium text-paper transition-colors hover:bg-teal"
           >
-            view releases →
+            view resume ↓
           </a>
           <a
             href="#contact"

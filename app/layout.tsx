@@ -23,7 +23,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "Prathamesh — Frontend Developer",
   description:
-    "Frontend Developer specializing in React, Next.js, and TypeScript. Experienced in building venue booking platforms, DailyDeck, and AI-powered QA tools.",
+    "Frontend Developer specializing in React, Next.js, and TypeScript. Building DailyDeck (productivity suite) and BugDeck (AI-powered QA platform).",
 };
 
 export default function RootLayout({
